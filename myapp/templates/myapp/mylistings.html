@@ -1,0 +1,26 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+
+<div class="text-2xl m-10 p-10 font-bold">📃 My listings</div>
+{% for product in products %}
+    <div class="itemcontainer flex shadow-lg m-10 p-10">
+        <span class="w-1/5">
+            {% if product.image.url is not null %}
+            <img  class="w-full" src="{{product.image.url}}" alt="">
+            {% endif %}    
+        </span>
+        <span class="w-2/5">
+            <div class="font-bold text-gray-700">{{product.name}}</div>
+            <div class="text-yellow-500">$ {{product.price}}</div>
+            <div>{{product.desc}}</div>
+        </span>
+        <span class="w-1/5 my-10 mx-10">
+            <a class="bg-pink-500 text-white font-bold px-5 py-2" href="{% url 'myapp:update_product' product.id %}">Edit</a>
+        </span>
+
+        <span class="w-1/5">
+            <a class="bg-red-500 text-white font-bold px-5 py-2" href="{% url 'myapp:delete_product' product.id %}">Delete</a>
+    </div>
+</div>
+{% endfor%}
+{% endblock %}

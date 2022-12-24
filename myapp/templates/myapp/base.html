@@ -1,0 +1,38 @@
+{% load static %}
+<html>
+
+    <head>
+        <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+    </head>
+    <body>
+        <nav class="bg-white shadow-lg">
+            <div  class="max-w-6x; mx-auto px-7">
+                <div class="flex justify-between">
+                    <div class="flex space-x-7">
+                        <div>
+                            <a href="#" class="flex items-center px-5 py-2">
+                            <img class="h-8 w-8" src="{% static 'myapp/images/shoppingbag.png' %}" alt="">
+                            <span class="text-yellow-500 font-semibold text-lg ">Buy&Sel</span>
+
+                            </a>
+                        </div>
+                        <div class="items-center flex space-x-1">
+                            <a href="#" class="py-4 px-2 text-gray-500 font-semibold border-b-4 border-green-500">Home</a>
+                            <a href="{% url 'myapp:add_product'%}" class="py-4 px-2 text-gray-500 font-semibold">Post Ad</a>
+                            <a href="{% url 'myapp:products' %}" class="py-4 px-2 text-gray-500 font-semibold">View products</a>
+                            {% if user.is_authenticated %}
+                                <a class="py-4 px-20 text-gray-500 font-semibold" href="{% url 'users:logout'%}">Logout</a>
+                                <a class="py-4 px-40 text-gray-500 font-semibold" href="{% url 'users:profile'%}">Profile</a>
+                                <a class="py-4 px-40 text-gray-500 font-semibold" href="{% url 'myapp:my_listings'%}">My Listings</a>
+                            {% else %}
+                                <a class="py-4 px-40 text-gray-500 font-semibold" href="{% url  'users:login' %}">Login</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% block content %}        
+        {% endblock %}
+    </body>
+</html>
